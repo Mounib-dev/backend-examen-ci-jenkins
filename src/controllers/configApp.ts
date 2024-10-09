@@ -4,12 +4,12 @@ import { Config } from "../models/configModel";
 
 export const configController = async (req: Request, res: any) => {
   console.log(req.body);
-  const { usersNumber, groupsNumber, lastGroup } = req.body;
+  const { usersNumber, groupsNumber, lastGroupOptions } = req.body;
   const newConfig = {
     usersNumber: usersNumber,
     groupsNumber: groupsNumber,
-    lastMin: lastGroup === "Smaller" ? true : false,
-    lastMax: lastGroup === "Bigger" ? true : false,
+    lastMin: lastGroupOptions === "Smaller" ? true : false,
+    lastMax: lastGroupOptions === "Bigger" ? true : false,
   };
   try {
     await Config.deleteMany();
