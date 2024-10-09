@@ -15,7 +15,10 @@ export const createGroup = async (req: Request, res: Response) => {
 
 export const getUsersWithoutGroup = async (req: Request, res: Response) => {
   try {
-    const users = await User.find({ group: { $exists: false } });
+    const users = await User.find({
+      $or: [{ group: { $exists: false } }, { group: null }],
+      role: 'user'
+    });
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: "Error fetching users", error });
