@@ -9,6 +9,16 @@ const config: JestConfigWithTsJest = {
   },
   testMatch: ["**/tests/**/*.test.ts"],
   rootDir: "./src",
+  reporters: [
+    "default",
+    [
+      "jest-junit",
+      {
+        outputDirectory: "./reports",
+        outputName: "junit.xml",
+      },
+    ],
+  ],
 };
 
 export default config;
