@@ -25,3 +25,22 @@ export const configController = async (req: Request, res: any) => {
     });
   }
 };
+
+// Fonction pour récupérer la configuration de l'application
+export const getConfig = async (req: Request, res: any) => {
+  try {
+    // On récupère la dernière configuration (findOne et trié par _id décroissant)
+    const config = await Config.findOne().sort({ _id: -1 });
+
+    if (config) {
+      return res.status(200).json(config);
+    } else {
+      return res.status(404).json({ message: "No configuration found" });
+    }
+  } catch (error: any) {
+    console.error(`[server]:🗄️  ${error}`);
+    return res.status(500).json({
+      message: "Sorry something went wrong, failed to fetch configuration.",
+    });
+  }
+};
